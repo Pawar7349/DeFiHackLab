@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 
@@ -29,7 +29,7 @@ contract ReentrancyTest is Test {
 
         assertEq(vulnerable.getBalance(), 0);
         assertGt(attacker.getBalance(), 5 ether);
-}
+    }
 
     function test_attack_fails_on_fixed() public {
         vm.deal(address(this), 6 ether);
