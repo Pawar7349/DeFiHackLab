@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract FixedContract{
+contract FixedContract {
     mapping(address => uint256) public balances;
 
     function deposit() public payable {
@@ -14,7 +14,7 @@ contract FixedContract{
 
         balances[msg.sender] = 0;
 
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
         require(success);
     }
 

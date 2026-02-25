@@ -1,66 +1,62 @@
-## Foundry
+# DeFiHackLab
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repo is my smart contract security lab.
 
-Foundry consists of:
+I pick real exploit patterns and rebuild them in small modules.
+Each module has:
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- vulnerable contract
+- attack contract
+- fixed contract
+- tests
+- short incident note
 
-## Documentation
+I keep everything in this repo:
 
-https://book.getfoundry.sh/
+- code in `src/`
+- tests in `test/`
+- incident notes in `incidents/`
 
-## Usage
+## Modules
 
-### Build
+- `overflow`
+- `reentrancy`
+- `access-control`
+- `txorigin`
+- `selfdestruct`
+- `oracle`
+- `governance`
+- `signature-replay`
+- `upgrade-misconfig`
 
-```shell
-$ forge build
+## Run
+
+```bash
+forge clean
+forge test -vvv
 ```
 
-### Test
+## Current status
 
-```shell
-$ forge test
-```
+- full test suite passing locally (`26` tests)
+- CI file: `.github/workflows/forge-tests.yml`
 
-### Format
+## Coverage
 
-```shell
-$ forge fmt
-```
+| Module | Real incident reference | Status |
+|---|---|---|
+| overflow | Beauty Chain (2018) | done |
+| reentrancy | The DAO (2016) | done |
+| access-control | Parity wallet init bug (2017) | done |
+| txorigin | tx.origin phishing pattern | done |
+| selfdestruct | Parity library kill path (2017) | done |
+| oracle | Mango Markets (2022) | done |
+| governance | Beanstalk (2022) | done |
+| signature-replay | replayable signed action pattern | done |
+| upgrade-misconfig | Wormhole UUPS risk (2022) | done |
 
-### Gas Snapshots
+## Next
 
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- add more invariant/fuzz coverage
+- add gas snapshots
+- add short exploit trace writeups

@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "forge-std/Test.sol";
 import "../../src/access-control/VulnerableContract.sol";
 import "../../src/access-control/AttackContract.sol";
-import "../../src/access-control/FixedCotract.sol";
+import "../../src/access-control/FixedContract.sol";
 
 contract AccessControlTest is Test {
     VulnerableContract vulnerable;
@@ -17,7 +17,7 @@ contract AccessControlTest is Test {
         fixed_ = new FixedContract();
     }
 
-    function test_attacker_claims_ownership_and_drains() public {
+    function test_attack_drains_wallet() public {
         vm.deal(address(this), 5 ether);
         payable(address(vulnerable)).transfer(5 ether);
 
@@ -26,7 +26,7 @@ contract AccessControlTest is Test {
         assertEq(address(vulnerable).balance, 0);
     }
 
-    function test_fixed_owner_cannot_be_changed() public {
+    function test_fixed_owner_is_set() public view {
         assertEq(fixed_.owner(), address(this));
     }
 }
