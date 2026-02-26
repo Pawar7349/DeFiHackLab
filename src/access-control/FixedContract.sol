@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract VulnerableContract {
+contract FixedContract {
     address public owner;
-    bool public initialized;
 
-    function initialize(address _owner) public {
-        require(!initialized);
-        owner = _owner;
-        initialized = true;
+    constructor() {
+        owner = msg.sender;
     }
 
     function withdraw() public {
